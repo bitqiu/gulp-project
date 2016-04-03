@@ -14,12 +14,13 @@ gulp.task('partials', function () {
   return gulp.src([
     path.join(config.paths.src, '/app/**/*.html')
   ])
-    // .pipe($.minifyHtml({
-    //   empty: true,
-    //   spare: true,
-    //   quotes: true
-    // }))
-    .pipe($.htmlmin({collapseWhitespace: true}))
+    .pipe($.minifyHtml({
+      empty: true,
+      spare: true,
+      quotes: true
+    }))
+    // .pipe($.htmlmin())
+    // .pipe($.htmlmin({collapseWhitespace: true}))
     .pipe($.angularTemplatecache('templateCacheHtml.js', {
       module: 'jackblog',
       root: 'app'
@@ -39,8 +40,7 @@ gulp.task('html',['inject','partials'],function () {
     var htmlFilter = $.filter('*.html',{restore: true});
     var jsFilter = $.filter('**/*.js',{restore: true});
     var cssFilter = $.filter('**/*.css',{restore: true});
-    var assets = $.useref;
-
+    var assets = $.useref.assets();
     return gulp.src(path.join(config.paths.tmp, '/serve/*.html'))
         //自动处理全部错误信息防止因为错误而导致 watch 不正常工作
         .pipe($.plumber(config.errorHandler()))
@@ -67,13 +67,14 @@ gulp.task('html',['inject','partials'],function () {
         .pipe($.revReplace())
         //html处理
         .pipe(htmlFilter)
-        // .pipe($.minifyHtml({
-        //   empty: true,
-        //   spare: true,
-        //   quotes: true,
-        //   conditionals: true
-        // }))
-        .pipe($.htmlmin({collapseWhitespace: true}))
+        .pipe($.minifyHtml({
+          empty: true,
+          spare: true,
+          quotes: true,
+          conditionals: true
+        }))
+        // .pipe($.htmlmin())
+        // .pipe($.htmlmin({collapseWhitespace: true}))
         .pipe(htmlFilter.restore)
         .pipe(gulp.dest(path.join(config.paths.dist, '/')))
         .pipe($.size({ title: path.join(config.paths.dist, '/'), showFiles: true }));
