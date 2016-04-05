@@ -78,6 +78,7 @@ gulp.task('html',['inject','partials'],function () {
         .pipe(htmlFilter.restore)
         .pipe(gulp.dest(path.join(config.paths.dist, '/')))
         .pipe($.size({ title: path.join(config.paths.dist, '/'), showFiles: true }));
+
 });
 
 gulp.task('fonts',function () {

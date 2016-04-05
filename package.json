@@ -1,5 +1,12 @@
 {
   "private": true,
+  "scripts": {
+    "start": "gulp serve",
+    "test": "gulp test:karma",
+    "test-e2e": "gulp test:e2e",
+    "pm2-start": "pm2 start process.json",
+    "pm2-restart": "pm2 restart process.json"
+  },
   "devDependencies": {
     "browser-sync": "^2.11.2",
     "browser-sync-spa": "^1.0.3",
@@ -32,7 +39,7 @@
     "gulp-size": "^2.1.0",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-uglify": "^1.5.3",
-    "gulp-useref": "^2.1",
+    "gulp-useref": "^1",
     "gulp-util": "^3.0.7",
     "http-proxy-middleware": "^0.13.0",
     "imagemin-pngquant": "^4.2.2",
